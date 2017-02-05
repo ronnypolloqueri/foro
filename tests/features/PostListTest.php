@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
 class PostListTest extends FeatureTestCase
 {
     public function test_un_usuario_puede_ver_el_listado_del_posts_e_ir_al_detalle_de_post()

@@ -37,8 +37,14 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $this->defaultUser = factory(\App\User::class)->create($attributes);
     }
 
-    public function createPost(array $attributes = [])
+    public function createPost(array $attributes = [], $num_items = 1)
+    {   
+        return factory(\App\Post::class, $num_items)->create($attributes);
+    }
+
+    public function countElements($selector, $number)
     {
-        return factory(\App\Post::class)->create($attributes);
+        $this->assertCount($number, $this->crawler->filter($selector));
+        return $this;
     }
 }
