@@ -22,4 +22,5 @@ Route::get('/home', 'HomeController@index');
 Route::get('posts/{post}', [
     'as' => 'posts.show',
     'uses' => 'PostsController@show',
-]);
+])->where('post', '\d+');  // soluciona problema de error en rutas*/
+/* ])->where('post', '[0-9]+'); // se confunde posts/create con posts/id */
