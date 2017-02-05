@@ -9,7 +9,7 @@ class ShowPostTest extends FeatureTestCase
             'name' => 'Ronny PA',
         ]);
 
-        $post = factory(\App\Post::class)->create([
+        $post = $this->createPost([
             'title'   => 'Este es el título del post',
             'content' => 'Este es el contenido',
             'user_id' => $user->id,
@@ -26,7 +26,7 @@ class ShowPostTest extends FeatureTestCase
     function test_las_viejas_urls_redirigiran_a_las_nuevas()
     {
         // Having 
-        $post = factory(\App\Post::class)->create([
+        $post = $this->createPost([
             'title' => 'Old title',
         ]);
 
