@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use \App\Post;
+
 class CreatePostController extends Controller
 {
     public function create(){

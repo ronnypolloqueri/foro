@@ -1,6 +1,6 @@
 <?php
 
 // Posts
-Route::get('posts', 'PostsController@create' )->name('posts.create');
-Route::post('posts', 'PostsController@store' )->name('posts.store');
+Route::get('posts', 'CreatePostController@create' )->name('posts.create');
+Route::post('posts', 'CreatePostController@store' )->name('posts.store');
 
