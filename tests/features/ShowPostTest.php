@@ -4,37 +4,31 @@ class ShowPostTest extends FeatureTestCase
 {
     function test_un_usuario_puede_ver_los_detalles_del_post()
     {
+        // Having 
         $user = $this->defaultUser([
             'name' => 'Ronny PA',
         ]);
 
-        // Having 
-        $post = factory(\App\Post::class)->make([
-        
-            'title' => 'Este es el título del post',
-            'content' => 'Este es el contenido del post',
+        $post = factory(\App\Post::class)->create([
+            'title'   => 'Este es el título del post',
+            'content' => 'Este es el contenido',
+            'user_id' => $user->id,
         ]);
-
-        $user->posts()->save($post);
 
         // When
         $this->visit($post->url)
             ->seeInElement('h1', $post->title)
             ->see($post->content)
-            ->see($user->name);
+            ->see('Ronny PA');
 
     }
 
     function test_las_viejas_urls_redirigiran_a_las_nuevas()
     {
-        $user = $this->defaultUser();
-
         // Having 
-        $post = factory(\App\Post::class)->make([
+        $post = factory(\App\Post::class)->create([
             'title' => 'Old title',
         ]);
-
-        $user->posts()->save($post);
 
         $old_url = $post->url;
 

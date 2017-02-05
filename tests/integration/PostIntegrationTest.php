@@ -10,14 +10,9 @@ class PostIntegrationTest extends TestCase
 
     function test_un_slug_es_generado_y_guardado_en_la_base_de_datos()
     {
-        $user = $this->defaultUser();
-
-        $post = factory(\App\Post::class)->make([
+        $post = factory(\App\Post::class)->create([
             'title' => 'Como instalar Laravel',
         ]);
-
-        $user->posts()->save($post);
-
 
         // fresh(), traera una instancia fresca de la bd
         $this->assertSame(
