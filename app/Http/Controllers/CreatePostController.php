@@ -23,6 +23,6 @@ class CreatePostController extends Controller
 
         auth()->user()->posts()->save($post);
 
-        return redirect()->route('posts.show', $post->id);
+        return redirect($post->url);
     }
 }

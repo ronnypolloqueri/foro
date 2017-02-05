@@ -1,12 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-class ShowPostTest extends TestCase
+class ShowPostTest extends FeatureTestCase
 {
-    public function test_un_usuario_puede_ver_los_detalles_del_post()
+    function test_un_usuario_puede_ver_los_detalles_del_post()
     {
         $user = $this->defaultUser([
             'name' => 'Ronny PA',
@@ -22,10 +18,31 @@ class ShowPostTest extends TestCase
         $user->posts()->save($post);
 
         // When
-        $this->visit(route('posts.show', $post))
+        $this->visit($post->url)
             ->seeInElement('h1', $post->title)
             ->see($post->content)
             ->see($user->name);
 
     }
+
+    function test_las_viejas_urls_redirigiran_a_las_nuevas()
+    {
+        $user = $this->defaultUser();
+
+        // Having 
+        $post = factory(\App\Post::class)->make([
+            'title' => 'Old title',
+        ]);
+
+        $user->posts()->save($post);
+
+        $old_url = $post->url;
+
+        $post->update(['title' => 'New Title']);
+
+        $this->visit($old_url)
+            ->assertResponseOk() // Sin ningun error 404, 500, etc 
+            ->seePageIs($post->url);
+    }
+
 }
